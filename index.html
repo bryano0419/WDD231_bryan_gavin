@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookQuest | Search</title>
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+    <header>
+        <h1>BookQuest</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search-section">
+            <h2>Find Your Next Adventure</h2>
+            <form id="book-search-form">
+                <input type="text" id="search-term" placeholder="Search by title or author..." required>
+                
+                <select id="genre-filter">
+                    <option value="all">All Genres</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                </select>
+                
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section id="results-area">
+            <div id="book-grid" class="grid-display">
+                <div class="book-card">
+                    <h3>Example Book Title</h3>
+                    <p>Author: Jane Doe</p>
+                    <a href="details.html?id=1">View Details</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BookQuest Team</p>
+        <p id="last-search">Last search: <span>None</span></p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
