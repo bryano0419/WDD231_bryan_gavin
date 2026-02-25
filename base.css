@@ -1,0 +1,154 @@
+/* base.css */
+
+/* --- 1. Global Styles & Variables --- */
+:root {
+    --primary-color: #005ab4;
+    --accent-color: #e67e22;
+    --background-light: #f4f7f6;
+    --white: #ffffff;
+    --text-dark: #000000;
+    --shadow: 0 4px 6px rgba(42, 42, 42, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+/* --- 2. Layout & Typography --- */
+header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* --- 3. Search Section --- */
+#search-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#search-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+#book-search-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+input[type="text"], select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 250px;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: var(--accent-color);
+    color: rgb(23, 0, 105);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #d35400;
+}
+
+/* --- 4. Results Grid --- */
+#book-grid {
+    display: grid;
+    /* This creates a responsive grid that fits as many columns as possible */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.book-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-card h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.book-card p {
+    font-style: italic;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.book-card a {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* --- 5. Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    background: #ddd;
+    font-size: 0.9rem;
+}
+
+#last-search {
+    margin-top: 10px;
+    color: #666;
+}
