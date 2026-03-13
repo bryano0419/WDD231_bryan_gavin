@@ -21,9 +21,44 @@ body {
     line-height: 1.6;
     background-color: var(--background-light);
     color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 1100px;
+    width: 100%;
+    margin: auto; /* This centers 'main' both vertically and horizontally within the flex body */
+    padding: 2rem 1rem;
 }
 
 /* --- 2. Layout & Typography --- */
+:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+button {
+    padding: 12px 24px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+button:hover, button:focus {
+    background-color: #bf691d;
+}
+.book-card a {
+    text-decoration: underline;
+    color: #c45a00;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
 header {
     background: var(--primary-color);
     color: var(--white);
@@ -76,7 +111,7 @@ main {
 
 input[type="text"], select {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 2px solid #767676;
     border-radius: 4px;
     font-size: 1rem;
     min-width: 250px;
