@@ -9,14 +9,18 @@
 <body>
     <header>
         <h1>BookQuest</h1>
-        <a href="index.html">Back to Search</a>
+        <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">← Back to Search</a>
     </header>
 
     <main id="details-container">
         <div class="detail-card">
-            <h2 id="book-title">Book Title Loading...</h2>
-            <p id="book-author">Author: ...</p>
-            <p id="book-desc">Description: ...</p>
+            <h2 id="book-title">Loading book details...</h2>
+            <hr>
+            <p><strong>Author:</strong> <span id="book-author">...</span></p>
+            <p><strong>Description:</strong></p>
+            <p id="book-desc">Fetching the summary from Open Library...</p>
+            
+            <div id="details-loader" class="loader-small"></div>
         </div>
     </main>
 
