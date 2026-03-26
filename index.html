@@ -20,9 +20,10 @@
         <section id="search-section">
             <h2>Find Your Next Adventure</h2>
             <form id="book-search-form">
+                <label for="search-term" class="hidden-visually" style="display:none;">Search Books</label>
                 <input type="text" id="search-term" placeholder="Search by title or author..." required>
-                <input type="text" name="q" placeholder="Search for a book..." required>
                 
+                <label for="genre-filter" class="hidden-visually" style="display:none;">Filter by Genre</label>
                 <select id="genre-filter">
                     <option value="all">All Genres</option>
                     <option value="fantasy">Fantasy</option>
@@ -35,14 +36,23 @@
             </form>
         </section>
 
+        <div id="loader-container" class="hidden">
+            <div class="book">
+                <div class="inner">
+                    <div class="left"></div>
+                    <div class="middle"></div>
+                    <div class="right"></div>
+                </div>
+                <ul>
+                    <li></li><li></li><li></li><li></li><li></li>
+                </ul>
+            </div>
+            <p>Scanning the library...</p>
+        </div>
+
         <section id="results-area">
             <div id="book-grid" class="grid-display">
-                <div class="book-card">
-                    <h3>Example Book Title</h3>
-                    <p>Author: Jane Doe</p>
-                    <a href="details.html?id=1">View Details</a>
                 </div>
-            </div>
         </section>
     </main>
 
