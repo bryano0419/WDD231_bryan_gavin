@@ -258,6 +258,52 @@ footer {
     transform-origin: 100% 2px;
 }
 
+/* --- 7. Details Page Specifics --- */
+
+/* Centers the card on the details page */
+#details-container {
+    display: flex;
+    justify-content: center;
+}
+
+.detail-view {
+    max-width: 800px;
+    width: 100%;
+    padding: 40px; /* More breathing room for details */
+}
+
+.detail-view h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.description-box {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#book-author {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+/* Small spinner for the details page */
+.loader-small {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Page flip animation logic */
 .book ul li:nth-child(n) { animation: page-flip var(--duration) ease infinite; }
 
