@@ -4,26 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details | BookQuest</title>
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./base.css">
 </head>
 <body>
     <header>
         <h1>BookQuest</h1>
-        <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">← Back to Search</a>
+        <nav>
+            <ul>
+                <li><a href="./index.html">← Back to Search</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main id="details-container">
-        <div class="detail-card">
+        <div class="book-card detail-view">
             <h2 id="book-title">Loading book details...</h2>
-            <hr>
             <p><strong>Author:</strong> <span id="book-author">...</span></p>
-            <p><strong>Description:</strong></p>
-            <p id="book-desc">Fetching the summary from Open Library...</p>
+            <div class="description-box">
+                <p><strong>Description:</strong></p>
+                <p id="book-desc">Fetching the summary from Open Library...</p>
+            </div>
             
             <div id="details-loader" class="loader-small"></div>
         </div>
     </main>
 
-    <script type="module" src="js/details.js"></script>
+    <footer>
+        <p>&copy; 2024 BookQuest Team</p>
+    </footer>
+
+    <script type="module" src="./js/details.js"></script>
 </body>
 </html>
