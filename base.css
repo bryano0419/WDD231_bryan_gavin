@@ -6,14 +6,19 @@
     --accent-color: #e67e22;
     --background-light: #f4f7f6;
     --white: #ffffff;
-    --text-dark: #000000;
-    --shadow: 0 4px 6px rgba(42, 42, 42, 0.1);
+    --text-dark: #333333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* Fluid base font size for better scaling */
+html {
+    font-size: 16px;
 }
 
 body {
@@ -26,58 +31,30 @@ body {
     min-height: 100vh;
 }
 
-main {
-    max-width: 1100px;
-    width: 100%;
-    margin: auto; /* This centers 'main' both vertically and horizontally within the flex body */
-    padding: 2rem 1rem;
-}
-
 /* --- 2. Layout & Typography --- */
-:focus {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-button {
-    padding: 12px 24px;
-    background-color: var(--accent-color);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-button:hover, button:focus {
-    background-color: #bf691d;
-}
-.book-card a {
-    text-decoration: underline;
-    color: #c45a00;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-
 header {
     background: var(--primary-color);
     color: var(--white);
-    padding: 1.5rem 5%;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--shadow);
+    flex-wrap: wrap; /* Scalability: Wraps on small screens */
+    gap: 1rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    gap: 1.5rem;
 }
 
 nav a {
     color: var(--white);
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 nav a:hover {
@@ -86,69 +63,79 @@ nav a:hover {
 
 main {
     max-width: 1100px;
+    width: 100%;
     margin: 2rem auto;
     padding: 0 1rem;
+    flex: 1; /* Pushes footer to bottom */
 }
 
-/* --- 3. Search Section --- */
-#search-section {
+footer {
     text-align: center;
-    margin-bottom: 3rem;
+    padding: 2rem;
+    background: #ddd;
+    font-size: 0.9rem;
+    margin-top: auto;
 }
 
-#search-section h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    color: var(--primary-color);
-}
-
-#book-search-form {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-input[type="text"], select {
-    padding: 12px;
-    border: 2px solid #767676;
-    border-radius: 4px;
-    font-size: 1rem;
-    min-width: 250px;
-}
-
+/* --- 3. UI Elements (Buttons & Inputs) --- */
 button {
     padding: 12px 24px;
     background-color: var(--accent-color);
-    color: rgb(23, 0, 105);
+    color: var(--white);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.1s;
 }
 
 button:hover {
     background-color: #d35400;
 }
 
-/* --- 4. Results Grid --- */
+button:active {
+    transform: scale(0.98);
+}
+
+input[type="text"], select {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex: 1; /* Allows input to grow */
+    min-width: 200px;
+}
+
+/* --- 4. Search Section & Grid --- */
+#search-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#book-search-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 #book-grid {
     display: grid;
-    /* This creates a responsive grid that fits as many columns as possible */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    /* Responsive Grid: min 280px, max 1 fraction of space */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
 }
 
 .book-card {
     background: var(--white);
-    padding: 20px;
+    padding: 1.5rem;
     border-radius: 8px;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s;
+    gap: 0.5rem;
+    transition: transform 0.2s ease;
 }
 
 .book-card:hover {
@@ -156,56 +143,104 @@ button:hover {
 }
 
 .book-card h3 {
-    margin-bottom: 10px;
     color: var(--primary-color);
-}
-
-.book-card p {
-    font-style: italic;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 1.25rem;
 }
 
 .book-card a {
+    margin-top: auto;
     text-decoration: none;
     color: var(--accent-color);
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
-/* --- 5. Footer --- */
-footer {
-    text-align: center;
-    padding: 2rem;
-    margin-top: 4rem;
-    background: #ddd;
-    font-size: 0.9rem;
+/* --- 5. Details Page Specifics --- */
+.detail-view {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-#last-search {
-    margin-top: 10px;
-    color: #666;
-/* --- 6. Loading Animation --- */
-#loader-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
+.detail-view h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
+.description-box {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+/* --- 6. Scalability (Media Queries) --- */
+
+/* Mobile Devices */
+@media (max-width: 650px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #book-search-form {
+        flex-direction: column;
+    }
+
+    input[type="text"], select, button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #search-section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablet / Small Laptops */
+@media (max-width: 900px) {
+    main {
+        padding: 0 1.5rem;
+    }
+}
+
+/* --- 7. Loading Animations --- */
 .hidden {
     display: none !important;
 }
 
+#loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+/* Simplified Small Spinner for Detail Loading */
+.loader-small {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Book Flip Animation (Existing) */
 .book {
     --color: var(--primary-color);
     --duration: 6.8s;
     width: 32px;
     height: 12px;
     position: relative;
-    margin: 32px 0 0 0;
-    zoom: 1.5; /* Makes the book a bit bigger */
+    margin: 32px 0;
+    transform: scale(1.5);
 }
 
 .book .inner {
@@ -217,8 +252,7 @@ footer {
     animation: book var(--duration) ease infinite;
 }
 
-.book .inner .left,
-.book .inner .right {
+.book .inner .left, .book .inner .right {
     width: 60px;
     height: 4px;
     top: 0;
@@ -240,83 +274,29 @@ footer {
 }
 
 .book ul {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     list-style: none;
     position: absolute;
-    left: 50%;
-    top: 0;
+    left: 50%; top: 0;
 }
 
 .book ul li {
-    height: 4px;
-    width: 48px;
+    height: 4px; width: 48px;
     background: var(--color);
     position: absolute;
-    top: -10px;
-    left: -24px;
+    top: -10px; left: -24px;
     transform-origin: 100% 2px;
+    animation: page-flip var(--duration) ease infinite;
 }
-
-/* --- 7. Details Page Specifics --- */
-
-/* Centers the card on the details page */
-#details-container {
-    display: flex;
-    justify-content: center;
-}
-
-.detail-view {
-    max-width: 800px;
-    width: 100%;
-    padding: 40px; /* More breathing room for details */
-}
-
-.detail-view h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.description-box {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
-#book-author {
-    font-size: 1.2rem;
-    color: var(--accent-color);
-}
-
-/* Small spinner for the details page */
-.loader-small {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid var(--primary-color);
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Page flip animation logic */
-.book ul li:nth-child(n) { animation: page-flip var(--duration) ease infinite; }
 
 @keyframes page-flip {
     0% { transform: rotateZ(0deg) translateX(-18px); }
     6% { transform: rotateZ(30deg) translateX(-18px); }
     13% { transform: rotateZ(0deg) translateX(-18px); }
-    /* Each page flips in sequence */
     54%, 100% { transform: rotateZ(180deg) translateX(-18px); }
 }
 
 @keyframes book {
     0%, 100% { transform: rotateZ(-90deg); }
     45%, 55% { transform: rotateZ(-90deg) translateY(-2px); }
-}
 }
