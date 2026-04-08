@@ -20,11 +20,9 @@
         <section id="search-section">
             <h2>Find Your Next Adventure</h2>
             <form id="book-search-form">
-                <label for="search-term" class="hidden-visually" style="display:none;">Search Books</label>
-                <input type="text" id="search-term" placeholder="Search by title or author..." required>
+                <input type="text" id="search-term" placeholder="Search by title or author..." aria-label="Book search query" required>
                 
-                <label for="genre-filter" class="hidden-visually" style="display:none;">Filter by Genre</label>
-                <select id="genre-filter">
+                <select id="genre-filter" aria-label="Filter by genre">
                     <option value="all">All Genres</option>
                     <option value="fantasy">Fantasy</option>
                     <option value="sci-fi">Sci-Fi</option>
@@ -43,16 +41,15 @@
                     <div class="middle"></div>
                     <div class="right"></div>
                 </div>
-                <ul>
-                    <li></li><li></li><li></li><li></li><li></li>
-                </ul>
+                <ul><li></li><li></li><li></li><li></li><li></li></ul>
             </div>
             <p>Scanning the library...</p>
         </div>
 
         <section id="results-area">
-            <div id="book-grid" class="grid-display">
-                </div>
+            <div id="book-grid">
+                <p class="placeholder-text">Enter a title above to begin your quest!</p>
+            </div>
         </section>
     </main>
 

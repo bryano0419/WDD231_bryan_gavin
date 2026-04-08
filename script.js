@@ -1,101 +1,93 @@
 /* ./script.js */
 
-// --- 1. Constants & Logic ---
-// These are scoped to this module file only
 const STORAGE_KEY = 'bookQuest_lastSearch';
 
 const saveSearch = (query) => localStorage.setItem(STORAGE_KEY, query);
 const getLastSearch = () => localStorage.getItem(STORAGE_KEY);
 
-/**
- * Data Fetching Logic
- */
-async function fetchBooks(query) {
-    const response = await fetch(
-        `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=10`
-    );
-    if (!response.ok) throw new Error('Fetch failed');
-    return await response.json();
-}
-
-// --- 2. DOM Elements ---
 const searchForm = document.getElementById('book-search-form');
 const searchInput = document.getElementById('search-term');
+const genreFilter = document.getElementById('genre-filter');
 const loader = document.getElementById('loader-container');
 const resultsGrid = document.getElementById('book-grid');
 const lastSearchDisplay = document.querySelector('#last-search span');
 
-// --- 3. UI Functions ---
-const updateLastSearchUI = () => {
-    const savedSearch = getLastSearch();
-    if (savedSearch && lastSearchDisplay) {
-        lastSearchDisplay.textContent = savedSearch;
+async function fetchBooks(query, genre) {
+    let url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`;
+    if (genre !== 'all') {
+        url += `&subject=${encodeURIComponent(genre)}`;
     }
-};
+    url += `&limit=12`;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Fetch failed');
+    return await response.json();
+}
 
 const renderBooks = (books) => {
-    resultsGrid.innerHTML = ''; // Clear previous
+    resultsGrid.innerHTML = ''; 
     books.forEach(book => {
         const card = document.createElement('div');
         card.className = 'book-card';
+        // split('/').pop() gets the ID from /works/OL12345W
+        const bookId = book.key ? book.key.split('/').pop() : 'unknown';
+        
         card.innerHTML = `
             <h3>${book.title}</h3>
             <p>By: ${book.author_name ? book.author_name[0] : 'Unknown Author'}</p>
-            <a href="details.html?id=${book.key.split('/').pop()}">View Details</a>
+            <a href="details.html?id=${bookId}">View Details</a>
         `;
         resultsGrid.appendChild(card);
     });
 };
 
-/**
- * Main Orchestrator
- */
-async function performSearch(query) {
+async function performSearch(query, genre = 'all') {
     if (!query) return;
 
     saveSearch(query);
-    updateLastSearchUI();
+    if (lastSearchDisplay) lastSearchDisplay.textContent = query;
 
     if (loader) loader.classList.remove('hidden');
+    resultsGrid.innerHTML = ''; 
     
     try {
-        const data = await fetchBooks(query);
-        if (data.docs.length === 0) {
-            resultsGrid.innerHTML = `<p>No books found for "${query}".</p>`;
+        const data = await fetchBooks(query, genre);
+        if (!data.docs || data.docs.length === 0) {
+            resultsGrid.innerHTML = `<p class="placeholder-text">No books found for "${query}" in this category.</p>`;
         } else {
             renderBooks(data.docs);
         }
     } catch (error) {
-        resultsGrid.innerHTML = `<p>Error fetching books. Please try again.</p>`;
+        resultsGrid.innerHTML = `<p class="placeholder-text">Error fetching books. Please check your connection.</p>`;
     } finally {
         if (loader) loader.classList.add('hidden');
     }
 }
 
-// --- 4. Event Listeners ---
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = searchInput.value.trim();
-    if (!query) return;
+    const genre = genreFilter.value;
 
-    // Update URL without reloading
     const newUrl = new URL(window.location);
     newUrl.searchParams.set('q', query);
+    newUrl.searchParams.set('genre', genre);
     window.history.pushState({}, '', newUrl);
     
-    performSearch(query);
+    performSearch(query, genre);
 });
 
-// --- 5. Initialization ---
 const init = () => {
-    // Check URL for existing search
     const params = new URLSearchParams(window.location.search);
     if (params.has('q')) {
         const query = params.get('q');
+        const genre = params.get('genre') || 'all';
         searchInput.value = query;
-        performSearch(query);
+        genreFilter.value = genre;
+        performSearch(query, genre);
     }
-    updateLastSearchUI();
+    const saved = getLastSearch();
+    if (saved && lastSearchDisplay) lastSearchDisplay.textContent = saved;
 };
 
 init();
